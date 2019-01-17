@@ -3,7 +3,7 @@
     <div class="media">
       <article class="post-text">
         <h2 class="title is-4 is-inline-block">
-          <router-link to="/post/1">{{ title }}</router-link>
+          <router-link :to="`/posts/${id}`">{{ title }}</router-link>
         </h2>
         <h3 class="subtitle is-6">
           <strong>{{ author }}</strong>
@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  props: ["title", "author", "text"]
+  props: ["id", "title", "author", "text"]
 };
 </script>
 
