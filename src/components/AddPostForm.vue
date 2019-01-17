@@ -3,8 +3,16 @@
     <div class="field">
       <label class="label">Title</label>
       <div class="control">
-        <input class="input" type="text" placeholder="e.g My Awesome Adventure">
+        <input
+          v-model="title"
+          :class="{ 'is-danger': emptyTitle}"
+          class="input"
+          type="text"
+          placeholder="e.g My Awesome Adventure"
+          @blur="touchTitle"
+        >
       </div>
+      <p class="help is-danger" v-show="emptyTitle">Please give me a name</p>
     </div>
 
     <b-field label="Tags">
@@ -24,29 +32,39 @@
     <div class="field">
       <label class="label">Author</label>
       <div class="control">
-        <input class="input" type="text" placeholder="e.g Alex Smith">
+        <input v-model="author" class="input" type="text" placeholder="e.g Alex Smith">
       </div>
     </div>
 
     <div class="field">
       <label class="label">Post text</label>
       <div class="control">
-        <textarea class="textarea" placeholder="Write your post here" rows="8"></textarea>
+        <textarea
+          v-model="text"
+          :class="{ 'is-danger': emptyText}"
+          class="textarea"
+          placeholder="Write your post here"
+          rows="8"
+          @blur="touchText"
+        ></textarea>
       </div>
+      <p class="help is-danger" v-show="emptyText">Please don't just leave me blank</p>
     </div>
 
     <div class="field is-grouped">
       <div class="control">
-        <button class="button is-link">Submit</button>
+        <button :disabled="formInvalid" @click.prevent="addPost" class="button is-link">Submit</button>
       </div>
       <div class="control">
-        <button class="button is-text">Cancel</button>
+        <router-link to="/" class="button is-text">Cancel</router-link>
       </div>
     </div>
   </form>
 </template>
 
 <script>
+import PostsService from "@/services/PostsService";
+
 const data = ["Books", "Cheesecakes", "Tea", "JS frameworks"];
 
 export default {
@@ -56,8 +74,24 @@ export default {
       isSelectOnly: false,
       openOnFocus: true,
       tags: [],
-      allowNew: false
+      allowNew: false,
+      title: "",
+      author: "",
+      text: "",
+      titleTouched: false,
+      textTouched: false,
     };
+  },
+  computed: {
+    emptyTitle: function() {
+      return this.titleTouched && this.title === "";
+    },
+    emptyText: function() {
+      return this.textTouched && this.text === "";
+    },
+    formInvalid: function() {
+      return this.emptyTitle || this.emptyText || !this.titleTouched;
+    }
   },
   methods: {
     getFilteredTags(text) {
@@ -69,6 +103,21 @@ export default {
             .indexOf(text.toLowerCase()) >= 0
         );
       });
+    },
+    async addPost() {
+      await PostsService.addPost({
+        title: this.title,
+        author: this.author,
+        tags: this.tags,
+        text: this.text
+      });
+      this.$router.push({ name: "posts" });
+    },
+    touchTitle() {
+      this.titleTouched = true;
+    },
+    touchText() {
+      this.textTouched = true;
     }
   }
 };
