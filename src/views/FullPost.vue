@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="box post-box">
-      <button class="delete is-pulled-right"></button>
+      <router-link to="/" class="delete is-pulled-right"></router-link>
       <div class="media">
         <article class="post-text">
           <h2 class="title is-4 is-inline-block">{{ post.title }}</h2>
