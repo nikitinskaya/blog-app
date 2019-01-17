@@ -16,6 +16,27 @@
   </div>
 </template>
 
+<script>
+import PostsService from '@/services/PostsService'
+export default {
+  name: 'post',
+  data () {
+    return {
+      post: {}
+    }
+  },
+  mounted () {
+    this.getPost()
+  },
+  methods: {
+    async getPosts () {
+      const response = await PostsService.fetchPosts()
+      this.posts = response.data.posts
+    }
+  }
+}
+</script>
+
 <style scoped>
 .delete-post {
   margin-top: 2em;
