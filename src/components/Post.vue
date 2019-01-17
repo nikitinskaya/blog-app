@@ -2,9 +2,12 @@
   <div class="box post-box">
     <div class="media">
       <article class="post-text">
-        <h2 class="title is-4 is-inline-block">
+        <h2 class="title post-title is-4 is-inline-block">
           <router-link :to="`/posts/${id}`">{{ title }}</router-link>
         </h2>
+        <b-taglist class="post-tags is-inline-block">
+          <b-tag class="post-tag" v-for="tag in tags" :key="tag">{{ tag }}</b-tag>
+        </b-taglist>
         <h3 class="subtitle is-6">
           <strong>{{ author }}</strong>
         </h3>
@@ -16,7 +19,7 @@
 
 <script>
 export default {
-  props: ["id", "title", "author", "text"]
+  props: ["id", "title", "author", "text", "tags"]
 };
 </script>
 
@@ -24,10 +27,19 @@ export default {
 .post-box {
   position: relative;
   margin-bottom: 1.5em;
-  @media (max-width: 1087px) {
-    margin-left: 1.5em;
-    margin-right: 1.5em;
-  }
+}
+
+.tags.post-tags {
+  margin-bottom: 0;
+  margin-left: 2em;
+}
+
+.tag.post-tag {
+  margin-bottom: 0;
+}
+
+.title.post-title {
+  margin-bottom: 0;
 }
 
 .post-text {
@@ -35,17 +47,17 @@ export default {
   white-space: nowrap;
 }
 
-.post-text::after {
+.post-box::after {
   content: "";
   background-image: linear-gradient(
     to right,
     rgba(255, 0, 0, 0),
     rgba(256, 256, 256, 1)
   );
-  height: 1.5em;
-  width: 3em;
+  height: 4em;
+  width: 6em;
   position: absolute;
-  right: 0;
-  bottom: 0;
+  right: 0.8em;
+  bottom: 5px;
 }
 </style>
