@@ -15,6 +15,10 @@ app
       [{
         title: "Hello World!",
         description: "Hi there! How are you?"
+      },
+      {
+        title: "Hello World 2!",
+        description: " 2 Hi there! How are you?"
       }]
     )
   })
