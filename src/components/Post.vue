@@ -20,10 +20,14 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .post-box {
   position: relative;
   margin-bottom: 1.5em;
+  @media (max-width: 1087px) {
+    margin-left: 1.5em;
+    margin-right: 1.5em;
+  }
 }
 
 .post-text {
