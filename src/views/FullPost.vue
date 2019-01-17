@@ -12,7 +12,7 @@
             <strong>{{ post.author }}</strong>
           </h3>
           <p>{{ post.text }}</p>
-          <button class="delete-post button is-outlined is-link">Delete</button>
+          <a @click="deletePost(post._id)" class="delete-post button is-outlined is-link">Delete</a>
         </article>
       </div>
     </div>
@@ -42,6 +42,10 @@ export default {
       });
       this.post = response.data;
       console.log(this.post);
+    },
+    async deletePost(id) {
+      await PostsService.deletePost(id);
+      this.$router.push({ name: "posts" });
     }
   }
 };
