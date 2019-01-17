@@ -1,29 +1,33 @@
 # blog-app
 
+A simple MEVN app with a REST API.
+MongoDB provided by Heroku's mLab addon.
+
+Take a look: [immense-headland-23951.herokuapp.com](https://immense-headland-23951.herokuapp.com/)
+
 ## Project setup
+
+1. Clone & install dependencies
 ```
-yarn install
+yarn
 ```
 
-### Compiles and hot-reloads for development
+2. Compile and hot-reload frontend for development
 ```
-yarn run serve
-```
-
-### Compiles and minifies for production
-```
-yarn run build
+yarn serve
 ```
 
-### Run your tests
+3. Compile and minify frontend for production
 ```
-yarn run test
-```
-
-### Lints and fixes files
-```
-yarn run lint
+yarn build
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Heroku deployment
+```
+heroku create
+heroku addons:create mongolab
+heroku push
+heroku open
+```
+
+Please provide your heroku app url to API service as `BASE_URL` in `src/services/Api.js`.
