@@ -7,6 +7,20 @@
       </div>
     </div>
 
+    <b-field label="Tags">
+      <b-taginput
+        v-model="tags"
+        :data="filteredTags"
+        autocomplete
+        :open-on-focus="openOnFocus"
+        :allow-new="allowNew"
+        field="user.first_name"
+        icon="label"
+        placeholder="Add a tag"
+        @typing="getFilteredTags"
+      ></b-taginput>
+    </b-field>
+
     <div class="field">
       <label class="label">Author</label>
       <div class="control">
@@ -31,3 +45,31 @@
     </div>
   </form>
 </template>
+
+<script>
+const data = ["Books", "Cheesecakes", "Tea", "JS frameworks"];
+
+export default {
+  data() {
+    return {
+      filteredTags: data,
+      isSelectOnly: false,
+      openOnFocus: true,
+      tags: [],
+      allowNew: false
+    };
+  },
+  methods: {
+    getFilteredTags(text) {
+      this.filteredTags = data.filter(option => {
+        return (
+          option.user.first_name
+            .toString()
+            .toLowerCase()
+            .indexOf(text.toLowerCase()) >= 0
+        );
+      });
+    }
+  }
+};
+</script>
