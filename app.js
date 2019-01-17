@@ -38,7 +38,7 @@ function handleError(res, reason, message, code) {
 }
 
 app.get("/api/posts", function (req, res) {
-  db.collection(POSTS_COLLECTION).find({}).toArray(function (err, docs) {
+  db.collection(POSTS_COLLECTION).find({}).sort({_id:-1}).toArray(function (err, docs) {
     if (err) {
       handleError(res, err.message, "Failed to get posts.");
     } else {
