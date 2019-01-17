@@ -2,27 +2,20 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require('cors');
 const history = require('connect-history-api-fallback');
+var mongodb = require("mongodb");
 
 const staticDir = __dirname + "/dist/";
 
 const app = express();
+const routes = require('./routes/routes.js');
 
 app
-  .use(bodyParser.json())
-  .use(cors())
-  .get('/api/posts', (req, res) => {
-    res.send(
-      [{
-        title: "Hello World!",
-        description: "Hi there! How are you?"
-      },
-      {
-        title: "Hello World 2!",
-        description: " 2 Hi there! How are you?"
-      }]
-    )
-  })
+    .use(bodyParser.json())
+    .use(cors())
+    .use('/api', routes);
 
-  .use(history())
-  .use(express.static(staticDir))
-  .listen(process.env.PORT || 8085);
+
+
+app.use(history())
+    .use(express.static(staticDir))
+    .listen(process.env.PORT || 8085);
