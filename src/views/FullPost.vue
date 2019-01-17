@@ -17,7 +17,7 @@
 </template>
 
 <style scoped>
-  .delete-post {
-      margin-top: 2em;
-  }
+.delete-post {
+  margin-top: 2em;
+}
 </style>

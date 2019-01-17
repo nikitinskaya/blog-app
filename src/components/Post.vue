@@ -22,8 +22,8 @@ export default {
 
 <style scoped>
 .post-box {
-    position: relative;
-    margin-bottom: 1.5em;
+  position: relative;
+  margin-bottom: 1.5em;
 }
 
 .post-text {

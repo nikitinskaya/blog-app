@@ -1,7 +1,7 @@
 import Api from '@/services/Api'
 
 export default {
-  fetchPosts () {
+  fetchPosts() {
     return Api().get('api/posts')
   }
 }
